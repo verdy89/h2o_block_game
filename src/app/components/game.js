@@ -7,6 +7,7 @@ export default class Game extends React.Component {
     super();
     this.timeLimitMs = 1 * 60 * 1000; // 制限時間は一旦1分にしておく
     this.startAt = new Date();
+    this.interval = null;
     this.state = {
       remainingTimeMs: this.timeLimitMs,
       msDiff: this.msToMinuteSecond(this.timeLimitMs),
@@ -15,10 +16,10 @@ export default class Game extends React.Component {
   }
 
   timer() {
-    setInterval(() => {
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
       if (this.state.gameStart) { this.tick(); }
-    }, 137);
-    // 割り切れないかつ大きめの数字にすることで、マシンパワーに優しく、かつタイマーが進んでいる感じを出す
+    }, 10);
   }
 
   tick() {
