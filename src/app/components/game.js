@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './board.js';
+import TweetButton from './tweetButton.js';
 import './game.css';
 
 export default class Game extends React.Component {
@@ -83,6 +84,10 @@ export default class Game extends React.Component {
           onClick={ () => this.timerSwitch() }
         >{ buttonText }</button>
         <div className='monospaced'>{ this.state.msDiff }</div>
+        <TweetButton
+          score={ this.state.score }
+        />
+
       </div>
     )
   }
