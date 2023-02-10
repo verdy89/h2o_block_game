@@ -61,7 +61,7 @@ export default class Board extends React.Component {
   isSquare(defaultArray) {
     const rowSet = new Set(defaultArray.map((e) => Math.floor(e / this.cols)));
     const colSet = new Set(defaultArray.map((e) => e % this.cols));
-    return rowSet.size < 3 && colSet.size < 3;
+    return (rowSet.size < 3 && colSet.size < 3) || rowSet.size === 1 || colSet.size === 1;
   }
 
   renderSquare(i) {
