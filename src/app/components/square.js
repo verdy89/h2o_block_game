@@ -5,23 +5,15 @@ export default class Square extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value,
-      isSelected: false
+      value: props.value
     };
-  }
-
-  changeChar() {
-    if (['H', 'O'].includes(this.state.value)) {
-      // this.setState({ value: '💧' });
-      this.setState({ isSelected: true });
-    }
   }
 
   render() {
     return (
       <button
-        className={ "square" + (this.state.isSelected ? ' selected' : '') }
-        onClick={ () => this.changeChar() }
+        className={ "square" + (this.props.isSelected ? ' selected' : '') }
+        onClick={ this.props.onClick }
       >
         { this.state.value }
       </button>

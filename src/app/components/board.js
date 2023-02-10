@@ -8,6 +8,8 @@ export default class Board extends React.Component {
     this.cols = 10;
     this.charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     this.chars = this.initChar(Array(this.rows * this.cols));
+    this.isSelectedArray = Array(this.rows * this.cols).fill(false);
+    this.state = { isSelectedArray: this.isSelectedArray };
   }
 
   randomAlphabet() {
@@ -21,11 +23,22 @@ export default class Board extends React.Component {
     return array;
   }
 
+  changeChar(i) {
+    if (['H', 'O'].includes(this.chars[i])) {
+      // this.setState({ value: '💧' });
+      // this.setState({ isSelected: true });
+      this.isSelectedArray[i] = true;
+      this.setState({ isSelectedArray: this.isSelectedArray });
+    }
+  }
+
   renderSquare(i) {
     return (
       <Square
         key={ 'square_' + i }
         value={ this.chars[i] }
+        isSelected={ this.state.isSelectedArray[i] }
+        onClick={ () => this.changeChar(i) }
       />
     )
   }
