@@ -7,12 +7,17 @@ export default class Game extends React.Component {
     super();
     this.timeLimitMs = 1 * 60 * 1000; // 制限時間は一旦1分にしておく
     this.startAt = new Date();
-    this.state = { msDiff: this.msToMinuteSecond(this.timeLimitMs) };
+    this.state = {
+      msDiff: this.msToMinuteSecond(this.timeLimitMs),
+      gameStart: false
+    };
   }
 
-  componentDidMount() {
+  timer() {
+    setInterval(() => {
+      if (this.state.gameStart) { this.tick(); }
+    }, 137);
     // 割り切れないかつ大きめの数字にすることで、マシンパワーに優しく、かつタイマーが進んでいる感じを出す
-    setInterval(() => this.tick(), 137);
   }
 
   tick() {
@@ -25,7 +30,8 @@ export default class Game extends React.Component {
     } else {
       // this.tick() を 137ms ごとに実行している関係で、最後 0 よりちょっと溢れて止まってしまうのを防ぐ
       this.setState({
-        msDiff: this.msToMinuteSecond(0)
+        msDiff: this.msToMinuteSecond(0),
+        gameStart: false
       });
     }
   }
@@ -40,10 +46,19 @@ export default class Game extends React.Component {
     return `${minuteStr}:${secondStr}.${afterDecimalPointStr}`
   }
 
+  timerSwitch() {
+    this.setState({ gameStart: !this.state.gameStart });
+  }
+
   render() {
+    this.timer();
+
     return (
       <div>
         <Board />
+        <button
+          onClick={ () => this.timerSwitch() }
+        >{ this.state.gameStart ? 'Stop' : 'Start' }</button>
         <div className='monospaced'>{ this.state.msDiff }</div>
       </div>
     )
