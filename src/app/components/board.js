@@ -26,7 +26,9 @@ export default class Board extends React.Component {
     return array;
   }
 
-  handleClick(i) {
+  async handleClick(i) {
+    const sleep = (second) => new Promise(resolve => setTimeout(resolve, second * 1000))
+
     if (['H', 'O'].includes(this.state.chars[i])) {
       this.isSelectedArray[i] = true;
       this.setState({ isSelectedArray: this.isSelectedArray });
@@ -47,7 +49,16 @@ export default class Board extends React.Component {
 
           for (let row = minRow; row <= maxRow; row++) {
             for (let col = minCol; col <= maxCol; col++) {
-              this.chars[row * this.cols + col] = '💧'
+              this.chars[row * this.cols + col] = '💧';
+            }
+          }
+          this.setState({ chars: this.chars });
+
+          await sleep(1);
+
+          for (let row = minRow; row <= maxRow; row++) {
+            for (let col = minCol; col <= maxCol; col++) {
+              this.chars[row * this.cols + col] = this.randomAlphabet();
             }
           }
           this.setState({ chars: this.chars });
