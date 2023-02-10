@@ -13,3 +13,8 @@
 .square:hover {
   background: #1b7695;
 }
+
+.selected {
+  background: yellow;
+  color: black;
+}
