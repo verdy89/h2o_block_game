@@ -18,7 +18,6 @@ export default class Board extends React.Component {
       <Square
         key={ 'square_' + i }
         value={ this.randomAlphabet() }
-        onClick={ () => console.log(i) }
       />
     )
   }
