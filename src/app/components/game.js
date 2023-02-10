@@ -9,7 +9,7 @@ export default class Game extends React.Component {
     super();
     this.timeLimitMs = 1 * 60 * 1000; // 制限時間は一旦1分にしておく
     this.interval = null;
-    this.timerIntervalMs = 10;
+    this.timerIntervalMs = 11;
     this.state = {
       remainingTimeMs: this.timeLimitMs,
       msDiff: this.msToMinuteSecond(this.timeLimitMs),
