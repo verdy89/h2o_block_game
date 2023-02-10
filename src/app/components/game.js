@@ -95,6 +95,7 @@ export default class Game extends React.Component {
           setScore={ this.setScore }
         />
         <button
+          className='startButton'
           onClick={ () => this.timerSwitch() }
         >{ buttonText }</button>
         <div className='monospaced'>{ this.state.msDiff }</div>

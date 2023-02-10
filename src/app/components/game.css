@@ -11,3 +11,17 @@
 .info {
   text-align: start;
 }
+
+.startButton {
+  font-weight: bold;
+  font-size: 25px;
+  vertical-align: bottom;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #d96226;
+  border-radius: 2px;
+  background: #d96226;
+  color: white;
+  margin: 8px 0;
+  padding: 4px 12px;
+}
