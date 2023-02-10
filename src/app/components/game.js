@@ -61,6 +61,7 @@ export default class Game extends React.Component {
       <div>
         <Board
           remainingTimeMs={ this.state.remainingTimeMs }
+          isGameStart={ this.state.gameStart }
         />
         <button
           onClick={ () => this.timerSwitch() }

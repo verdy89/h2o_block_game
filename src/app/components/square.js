@@ -8,7 +8,7 @@ export default class Square extends React.Component {
         className={ "square" + (this.props.isSelected ? ' selected' : '') }
         onClick={ this.props.onClick }
       >
-        { this.props.value }
+        { this.props.isGameStart ? this.props.value : '' }
       </button>
     );
   }

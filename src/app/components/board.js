@@ -3,8 +3,8 @@ import Square from './square.js';
 import './board.css';
 
 export default class Board extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.rows = 16;
     this.cols = 10;
     this.state = {
@@ -101,6 +101,7 @@ export default class Board extends React.Component {
     return (
       <Square
         key={ 'square_' + i }
+        isGameStart={ this.props.isGameStart }
         value={ this.state.chars[i] }
         isSelected={ this.state.isSelectedArray[i] }
         onClick={ () => this.handleClick(i) }
