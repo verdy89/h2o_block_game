@@ -8,6 +8,7 @@ export default class Game extends React.Component {
     this.timeLimitMs = 1 * 60 * 1000; // 制限時間は一旦1分にしておく
     this.startAt = new Date();
     this.state = {
+      remainingTimeMs: this.timeLimitMs,
       msDiff: this.msToMinuteSecond(this.timeLimitMs),
       gameStart: false
     };
@@ -25,11 +26,13 @@ export default class Game extends React.Component {
     const diff = this.timeLimitMs - (now - this.startAt);
     if (diff > 0) {
       this.setState({
+        remainingTimeMs: diff,
         msDiff: this.msToMinuteSecond(diff)
       });
     } else {
       // this.tick() を 137ms ごとに実行している関係で、最後 0 よりちょっと溢れて止まってしまうのを防ぐ
       this.setState({
+        remainingTimeMs: 0,
         msDiff: this.msToMinuteSecond(0),
         gameStart: false
       });
@@ -55,7 +58,9 @@ export default class Game extends React.Component {
 
     return (
       <div>
-        <Board />
+        <Board
+          remainingTimeMs={ this.state.remainingTimeMs }
+        />
         <button
           onClick={ () => this.timerSwitch() }
         >{ this.state.gameStart ? 'Stop' : 'Start' }</button>
