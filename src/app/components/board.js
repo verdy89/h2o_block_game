@@ -37,7 +37,7 @@ export default class Board extends React.Component {
       }
 
       if (indexesOfSelectedSquares.length === 3) {
-        if (this.isSquare(indexesOfSelectedSquares)) {
+        if (this.isH2O(indexesOfSelectedSquares) && this.isSquare(indexesOfSelectedSquares)) {
           const rows = indexesOfSelectedSquares.map((e) => Math.floor(e / this.cols));
           const cols = indexesOfSelectedSquares.map((e) => e % this.cols);
           const minRow = rows.reduce((a, b) => { return Math.min(a, b); });
@@ -56,6 +56,11 @@ export default class Board extends React.Component {
         this.setState({isSelectedArray: Array(this.rows * this.cols).fill(false)});
       }
     }
+  }
+
+  isH2O(indexArray) {
+    const chars = indexArray.map(i => this.chars[i]).sort();
+    return JSON.stringify(chars) === JSON.stringify(['H', 'H', 'O']);
   }
 
   isSquare(defaultArray) {
