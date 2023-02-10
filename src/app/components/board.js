@@ -102,6 +102,7 @@ export default class Board extends React.Component {
       <Square
         key={ 'square_' + i }
         isGameStart={ this.props.isGameStart }
+        isGameEnd={ this.props.isGameEnd }
         value={ this.state.chars[i] }
         isSelected={ this.state.isSelectedArray[i] }
         onClick={ () => this.handleClick(i) }

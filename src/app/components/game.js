@@ -49,21 +49,31 @@ export default class Game extends React.Component {
   }
 
   timerSwitch() {
-    this.setState({ gameStart: !this.state.gameStart });
+    if (this.state.remainingTimeMs === 0) {
+      window.location.reload();
+    } else {
+      this.setState({ gameStart: !this.state.gameStart });
+    }
   }
 
   render() {
     this.timer();
+
+    const buttonText =
+      this.state.remainingTimeMs === 0
+        ? 'Reset'
+        : this.state.gameStart ? 'Stop' : 'Start'
 
     return (
       <div>
         <Board
           remainingTimeMs={ this.state.remainingTimeMs }
           isGameStart={ this.state.gameStart }
+          isGameEnd={ this.state.remainingTimeMs === 0 }
         />
         <button
           onClick={ () => this.timerSwitch() }
-        >{ this.state.gameStart ? 'Stop' : 'Start' }</button>
+        >{ buttonText }</button>
         <div className='monospaced'>{ this.state.msDiff }</div>
       </div>
     )
