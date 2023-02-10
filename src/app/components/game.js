@@ -14,7 +14,8 @@ export default class Game extends React.Component {
       remainingTimeMs: this.timeLimitMs,
       msDiff: this.msToMinuteSecond(this.timeLimitMs),
       gameStart: false,
-      score: 0
+      score: 0,
+      level: 1 // Board の this.charset を level + 2 文字目まで使う
     };
   }
 
@@ -59,6 +60,10 @@ export default class Game extends React.Component {
     }
   }
 
+  setLevel = (level) => {
+    this.setState({ level: level });
+  }
+
   setScore = (score) => {
     this.setState({ score: score });
   }
@@ -74,11 +79,14 @@ export default class Game extends React.Component {
     return (
       <div>
         <div className='white'>Score: { this.state.score }</div>
+        <div className='white'>Level: { this.state.level }</div>
         <Help />
         <Board
           remainingTimeMs={ this.state.remainingTimeMs }
           isGameStart={ this.state.gameStart }
           isGameEnd={ this.state.remainingTimeMs === 0 }
+          level={ this.state.level }
+          setLevel={ this.setLevel }
           score={ this.state.score }
           setScore={ this.setScore }
         />

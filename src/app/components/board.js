@@ -7,16 +7,12 @@ export default class Board extends React.Component {
     super(props);
     this.rows = 16;
     this.cols = 10;
-    this.state = {
-      level: 1 // this.charset を level + 2 文字目まで使う
-    };
     this.charset = 'HOABCDEFGIJKLMNPQRSTUVWXYZ'; // H と O だけ先頭に持ってきたアルファベット
     this.chars = this.initChar(Array(this.rows * this.cols));
     this.isSelectedArray = Array(this.rows * this.cols).fill(false);
     this.state = {
       isSelectedArray: this.isSelectedArray,
       chars: this.chars,
-      level: 1
     };
   }
 
@@ -28,7 +24,7 @@ export default class Board extends React.Component {
 
   initChar(array) {
     for (let i = 0; i < array.length; i++) {
-      array[i] = this.randomAlphabet(this.state.level);
+      array[i] = this.randomAlphabet(this.props.level);
     }
     return array;
   }
@@ -61,13 +57,14 @@ export default class Board extends React.Component {
           }
           this.setState({
             chars: this.chars,
-            level: this.state.level + 2 < this.charset.length
-              ? this.state.level + 1
-              : this.state.level
           });
+          const level = this.props.level + 2 < this.charset.length
+            ? this.props.level + 1
+            : this.props.level
+          this.props.setLevel(level);
           const score =
             this.props.score
-            + this.state.level * this.props.remainingTimeMs
+            + this.props.level * this.props.remainingTimeMs
               * (maxRow - minRow + 1) * (maxCol - minCol + 1);
           this.props.setScore(score);
 
@@ -75,7 +72,7 @@ export default class Board extends React.Component {
 
           for (let row = minRow; row <= maxRow; row++) {
             for (let col = minCol; col <= maxCol; col++) {
-              this.chars[row * this.cols + col] = this.randomAlphabet(this.state.level);
+              this.chars[row * this.cols + col] = this.randomAlphabet(this.props.level);
             }
           }
           this.setState({ chars: this.chars });
@@ -120,11 +117,6 @@ export default class Board extends React.Component {
       rows.push(<div key={ 'row_' + rowNum } className="board-row">{ row }</div>)
     }
 
-    return (
-      <div>
-        <div>{ rows }</div>
-        <div className='white'>Level: { this.state.level }</div>
-      </div>
-    );
+    return ( <div>{ rows }</div> );
   }
 }
