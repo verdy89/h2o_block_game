@@ -11,7 +11,8 @@ export default class Game extends React.Component {
     this.state = {
       remainingTimeMs: this.timeLimitMs,
       msDiff: this.msToMinuteSecond(this.timeLimitMs),
-      gameStart: false
+      gameStart: false,
+      score: 0
     };
   }
 
@@ -56,6 +57,10 @@ export default class Game extends React.Component {
     }
   }
 
+  setScore = (score) => {
+    this.setState({ score: score });
+  }
+
   render() {
     this.timer();
 
@@ -66,10 +71,13 @@ export default class Game extends React.Component {
 
     return (
       <div>
+        <div className='white'>Score: { this.state.score }</div>
         <Board
           remainingTimeMs={ this.state.remainingTimeMs }
           isGameStart={ this.state.gameStart }
           isGameEnd={ this.state.remainingTimeMs === 0 }
+          score={ this.state.score }
+          setScore={ this.setScore }
         />
         <button
           onClick={ () => this.timerSwitch() }

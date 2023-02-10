@@ -16,8 +16,7 @@ export default class Board extends React.Component {
     this.state = {
       isSelectedArray: this.isSelectedArray,
       chars: this.chars,
-      level: 1,
-      score: 0
+      level: 1
     };
   }
 
@@ -62,14 +61,15 @@ export default class Board extends React.Component {
           }
           this.setState({
             chars: this.chars,
-            score:
-                this.state.score
-              + this.state.level * this.props.remainingTimeMs
-                * (maxRow - minRow + 1) * (maxCol - minCol + 1),
             level: this.state.level + 2 < this.charset.length
               ? this.state.level + 1
               : this.state.level
           });
+          const score =
+            this.props.score
+            + this.state.level * this.props.remainingTimeMs
+              * (maxRow - minRow + 1) * (maxCol - minCol + 1);
+          this.props.setScore(score);
 
           await sleep(1);
 
@@ -123,7 +123,6 @@ export default class Board extends React.Component {
     return (
       <div>
         <div>{ rows }</div>
-        <div className='white'>Score: { this.state.score }</div>
         <div className='white'>Level: { this.state.level }</div>
       </div>
     );
