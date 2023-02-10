@@ -78,9 +78,13 @@ export default class Game extends React.Component {
 
     return (
       <div>
-        <div className='white'>Score: { this.state.score }</div>
-        <div className='white'>Level: { this.state.level }</div>
-        <Help />
+        <div className='header'>
+          <div className='info'>
+            <div className='white'>Score: { this.state.score }</div>
+            <div className='white'>Level: { this.state.level }</div>
+          </div>
+          <Help />
+        </div>
         <Board
           remainingTimeMs={ this.state.remainingTimeMs }
           isGameStart={ this.state.gameStart }
