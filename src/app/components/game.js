@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './board.js';
+import Help from './help.js';
 import TweetButton from './tweetButton.js';
 import './game.css';
 
@@ -73,6 +74,7 @@ export default class Game extends React.Component {
     return (
       <div>
         <div className='white'>Score: { this.state.score }</div>
+        <Help />
         <Board
           remainingTimeMs={ this.state.remainingTimeMs }
           isGameStart={ this.state.gameStart }
