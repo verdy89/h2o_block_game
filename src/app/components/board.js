@@ -1,27 +1,34 @@
 import React from 'react';
 import Square from './square.js';
+import './board.css';
 
 export default class Board extends React.Component {
   constructor() {
     super();
     this.rows = 16;
     this.cols = 10;
-    this.charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    this.state = {
+      level: 1 // this.charset を level + 2 文字目まで使う
+    };
+    this.charset = 'HOABCDEFGIJKLMNPQRSTUVWXYZ'; // H と O だけ先頭に持ってきたアルファベット
     this.chars = this.initChar(Array(this.rows * this.cols));
     this.isSelectedArray = Array(this.rows * this.cols).fill(false);
     this.state = {
       isSelectedArray: this.isSelectedArray,
-      chars: this.chars
+      chars: this.chars,
+      level: 1
     };
   }
 
-  randomAlphabet() {
-    return this.charset[Math.floor(Math.random() * this.charset.length)];
+  randomAlphabet(level) {
+    const charCount = level + 2; // H と O の分 2 増やす
+    const charset = this.charset.substr(0, charCount);
+    return charset[Math.floor(Math.random() * charset.length)];
   }
 
   initChar(array) {
     for (let i = 0; i < array.length; i++) {
-      array[i] = this.randomAlphabet();
+      array[i] = this.randomAlphabet(this.state.level);
     }
     return array;
   }
@@ -52,13 +59,18 @@ export default class Board extends React.Component {
               this.chars[row * this.cols + col] = '💧';
             }
           }
-          this.setState({ chars: this.chars });
+          this.setState({
+            chars: this.chars,
+            level: this.state.level + 2 < this.charset.length
+              ? this.state.level + 1
+              : this.state.level
+          });
 
           await sleep(1);
 
           for (let row = minRow; row <= maxRow; row++) {
             for (let col = minCol; col <= maxCol; col++) {
-              this.chars[row * this.cols + col] = this.randomAlphabet();
+              this.chars[row * this.cols + col] = this.randomAlphabet(this.state.level);
             }
           }
           this.setState({ chars: this.chars });
@@ -101,6 +113,11 @@ export default class Board extends React.Component {
       rows.push(<div key={ 'row_' + rowNum } className="board-row">{ row }</div>)
     }
 
-    return <div>{ rows }</div>;
+    return (
+      <div>
+        <div>{ rows }</div>
+        <div className='white'>Level: { this.state.level }</div>
+      </div>
+    );
   }
 }
