@@ -1,5 +1,6 @@
 .monospaced {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-size: 20px;
 }
 
 .header {
@@ -24,4 +25,10 @@
   color: white;
   margin: 8px 0;
   padding: 4px 12px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

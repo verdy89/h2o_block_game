@@ -94,11 +94,13 @@ export default class Game extends React.Component {
           score={ this.state.score }
           setScore={ this.setScore }
         />
-        <button
-          className='startButton'
-          onClick={ () => this.timerSwitch() }
-        >{ buttonText }</button>
-        <div className='monospaced'>{ this.state.msDiff }</div>
+        <div className='flex'>
+          <button
+            className='startButton'
+            onClick={ () => this.timerSwitch() }
+          >{ buttonText }</button>
+          <div className='monospaced'>{ this.state.msDiff }</div>
+        </div>
         <TweetButton
           score={ this.state.score }
         />
