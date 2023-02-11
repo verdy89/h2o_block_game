@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/h2o_block_game/static/css/main.934d0bdc.css",
+    "main.css": "/h2o_block_game/static/css/main.cdf99933.css",
     "main.js": "/h2o_block_game/static/js/main.0736ee1b.js",
     "static/js/787.b47fb39e.chunk.js": "/h2o_block_game/static/js/787.b47fb39e.chunk.js",
     "static/media/img2.png": "/h2o_block_game/static/media/img2.41090a7c71bcd4e64452.png",
     "static/media/img1.png": "/h2o_block_game/static/media/img1.0592883d893609e88cd2.png",
     "index.html": "/h2o_block_game/index.html",
-    "main.934d0bdc.css.map": "/h2o_block_game/static/css/main.934d0bdc.css.map",
+    "main.cdf99933.css.map": "/h2o_block_game/static/css/main.cdf99933.css.map",
     "main.0736ee1b.js.map": "/h2o_block_game/static/js/main.0736ee1b.js.map",
     "787.b47fb39e.chunk.js.map": "/h2o_block_game/static/js/787.b47fb39e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.934d0bdc.css",
+    "static/css/main.cdf99933.css",
     "static/js/main.0736ee1b.js"
   ]
 }
