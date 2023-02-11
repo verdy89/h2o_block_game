@@ -16,11 +16,11 @@ export default class Help extends React.Component {
             <div className="modal-contents">
               <a href="#!" className="modal-close">✕</a>
               <div className="modal-content">
-                <h2>H<sub>2</sub>Oブロックゲーム</h2>
+                <h3>ブロックゲーム "jOH-Hatsu"</h3>
                 <div>H, H, Oで囲んで水を作ろう！</div>
                 <img src={img1} className="img" alt="img1" />
                 <img src={img2} className="img" alt="img2" />
-                <div>一度に作った水の数が多いほど</div>
+                <div>一度に飛ばした水の量が多いほど</div>
                 <div>高得点がもらえるよ！</div>
               </div>
             </div>
